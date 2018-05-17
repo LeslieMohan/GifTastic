@@ -7,6 +7,7 @@ body {
     height: 100%;
     width: 100%;
     margin: 0;
+    min-height: 100vh;
 }
 
 
@@ -29,7 +30,6 @@ button {
 }
 
 button:hover {color: red}
-
 button:active {
   background-color: black;
   box-shadow: 0 5px red;
@@ -116,6 +116,9 @@ footer {
     /*width: 200px;
     height: 15px;*/
 
+}
+input:focus { 
+    background-color: black;
 }
 
 p {

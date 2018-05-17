@@ -7,6 +7,7 @@ $(document).ready(function() {
 
 // create buttons of the array               
     function makeButton() {
+             $("#buttonContainer").empty();
             for (var i = 0; i < topics.length; i++) {
                       var btn = $("<button>").attr("data-musicals", topics[i]).text(topics[i]);
                       $("#buttonContainer").append(btn);
@@ -16,7 +17,8 @@ $(document).ready(function() {
     window.onload = makeButton();
 
 
-	$("btn").on("click", function() {      //empty previous gifs upon next button selection
+	$("btn").on("click", function() {
+                                                //empty previous gifs upon next button selection
 		$(".gifs").unbind("click");
 		$("#gifsContainer").empty();
 		
@@ -24,7 +26,9 @@ $(document).ready(function() {
 
 // Add click event to buttons
 
-    $("button").on("click", function() {
+    
++    $("#buttonContainer").on("click", "button", function(){
+        //alert("hello");
             var musicals = $(this).attr("data-musicals");//Grab, store data-musicals value from button
             var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + musicals + "&api_key=dCPyXBjQ4KldTQPiQVC71Y6ChRyzgKxT&limit=10";// Construct queryURL, use musical name
 
@@ -77,20 +81,23 @@ $(document).ready(function() {
         
     });
 
+    
+
     //submit new musical button by user choice
-        
-            //$("form").submit(); 
-        $("#submit").on("click", function() {
-                       var userInput = $("#userChoice").val().trim();
-                       console.log($("#userChoice"));
-                       topics.push(userInput);
-                       makeButtons();
-                       return false;
-
-
-
-        });
-            
+                    
+                 
++        $("#submit").on("click", function(event) {
+    +          event.preventDefault();
+                            var userInput = $("#userChoice").val().trim();
+                            console.log($("#userChoice"));
+                            topics.push(userInput);
+    -                      
+    +                       makeButton();
+                           // return false;
+     
+     
+     
+             });
 	                
 
 
