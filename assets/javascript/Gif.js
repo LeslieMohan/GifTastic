@@ -17,17 +17,19 @@ $(document).ready(function() {
     window.onload = makeButton();
 
 
+
+//empty previous gifs upon next button selection
 	$("btn").on("click", function() {
-                                                //empty previous gifs upon next button selection
+                                                
 		$(".gifs").unbind("click");
 		$("#gifsContainer").empty();
 		
-	});
+    });
+    
 
 // Add click event to buttons
 
-    
-+    $("#buttonContainer").on("click", "button", function(){
+    $("#buttonContainer").on("click", "button", function(){
         //alert("hello");
             var musicals = $(this).attr("data-musicals");//Grab, store data-musicals value from button
             var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + musicals + "&api_key=dCPyXBjQ4KldTQPiQVC71Y6ChRyzgKxT&limit=10";// Construct queryURL, use musical name
@@ -44,11 +46,13 @@ $(document).ready(function() {
           
             var results = response.data;// storing the data from the AJAX request in the results variable
                 for (var i = 0; i < results.length; i++) {     // Loop through each result item
+
+                    
                         var musicalsDiv = $("<div>");          // Create, store a div tag
                         var p = $("<p>").text("Rating: " + results[i].rating);   // Create p tag with result item's rating
                         var musicalsImage = $('<img src="'+results[i].images.fixed_height.url+'" >');
                           // Create, store image tag
-            // Setting the src attribute of the image to a property pulled off the result item
+            // Setting the src attribute of the image to a property taken from the result item
                         musicalsImage.attr("src", results[i].images.fixed_height.url);
                         musicalsImage.attr('data-still', results[i].images.fixed_height_still.url);
                         musicalsImage.attr('data-animate', results[i].images.fixed_height.url);
@@ -61,8 +65,9 @@ $(document).ready(function() {
             
                         $("#gifsContainer").prepend(musicalsDiv);  // Prepend musicalsDiv to HTML page in "#gifsContainer" div
 
-                        $('.gifs').on('click', function() {
 
+//changing gif from animate to still and vice versa
+                        $('.gifs').on('click', function() {
 
                             var state = $(this).attr('data-state');
         
@@ -83,11 +88,12 @@ $(document).ready(function() {
 
     
 
-    //submit new musical button by user choice
+//submit new musical button by user choice
                     
                  
 +        $("#submit").on("click", function(event) {
-    +          event.preventDefault();
+
+    +                       event.preventDefault();
                             var userInput = $("#userChoice").val().trim();
                             console.log($("#userChoice"));
                             topics.push(userInput);
